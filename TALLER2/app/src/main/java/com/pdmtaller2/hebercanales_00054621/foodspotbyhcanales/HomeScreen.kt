@@ -21,30 +21,30 @@ fun HomeScreen(
     LazyColumn(
         modifier = Modifier.padding(16.dp)
     ) {
-        // Agrupar los restaurantes por categoría
         val groupedRestaurants = restaurants.groupBy { it.category }
 
         groupedRestaurants.forEach { (category, restaurantsInCategory) ->
             item {
-                Text(
-                    text = category,
-                    style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
-                    modifier = Modifier.padding(vertical = 8.dp)
-                )
-            }
-            item {
-                LazyRow(
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    items(restaurantsInCategory) { restaurant ->
-                        RestaurantItem(restaurant = restaurant, onClick = { onRestaurantClick(restaurant) })
+                Column {
+                    Text(
+                        text = category,
+                        style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
+                        modifier = Modifier.padding(vertical = 8.dp)
+                    )
+                    LazyRow(
+                        horizontalArrangement = Arrangement.spacedBy(16.dp),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        items(restaurantsInCategory) { restaurant ->
+                            RestaurantItem(restaurant = restaurant, onClick = { onRestaurantClick(restaurant) })
+                        }
                     }
                 }
             }
         }
     }
 }
+
 
 @Composable
 fun RestaurantItem(
