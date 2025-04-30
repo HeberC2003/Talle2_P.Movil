@@ -13,9 +13,11 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -26,6 +28,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -73,20 +77,24 @@ fun MenuScreen(restaurant: Restaurant, navController: NavController) {
                                 Toast
                                     .makeText(context, "${dish.name} agregado al carrito", Toast.LENGTH_SHORT)
                                     .show()
-                            }
+                            },
+                        shape = RoundedCornerShape(12.dp),
+                        elevation = CardDefaults.cardElevation(6.dp)
                     ) {
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier.padding(8.dp)
+                            modifier = Modifier.padding(12.dp)
                         ) {
                             Image(
                                 painter = rememberAsyncImagePainter(dish.imageUrl),
                                 contentDescription = dish.name,
                                 modifier = Modifier
-                                    .size(80.dp)
-                                    .padding(8.dp)
+                                    .size(90.dp)
+                                    .clip(
+                                        RoundedCornerShape(12.dp)),
+                                contentScale = ContentScale.Crop
                             )
-                            Spacer(modifier = Modifier.width(8.dp))
+                            Spacer(modifier = Modifier.width(12.dp))
                             Column {
                                 Text(text = dish.name, style = MaterialTheme.typography.titleMedium)
                                 Text(text = dish.description, style = MaterialTheme.typography.bodySmall)
